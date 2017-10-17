@@ -1,0 +1,74 @@
+<!--
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>login regastration</title>
+  <meta name="login" content="flask_python_sql">
+  <meta name="tyson" content="uhhhhh">
+**************************************-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Login and register</title>
+  <meta charset="utf-8">
+  <meta name="login" content="flask_python_sql">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Login and Register</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+<!--
+    {% block body %}
+    {% if session['logged_in'] == 'true' %}
+        <li>{{session['screenName']}}</li>
+    {% else %}
+-->
+<!--
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+          <form class="form-inline" action="/login" method="Get">
+            <span class="form-group"><label for="email">Email address:</label>
+              
+            <input type="email" class="form-control" name="email1">
+            </span>
+              
+            <span class="form-group"><label for="pwd">Password:</label>
+            <input type="password" class="form-control" name="pwd">
+            </span>
+              
+        <input type='submit' value='login'><span class="glyphicon glyphicon-log-in"></span>
+    </li>
+          </form>
+
+-->
+<form action="/login" method="Post">
+    <input type="text" name="email">
+    <input type="text" name ="pw">
+    <input type="submit" value="login">
+</form>    
+<!--    </ul>-->
+<!--
+    {% endif %}
+    {% endblock %}
+-->
+  </div>
+</nav>
+    
+<h3> this is a page where u can register to the database and login useing those cradentals</h3>
+    
+</body>
+</html>

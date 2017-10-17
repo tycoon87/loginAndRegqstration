@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="login" content="flask_python_sql">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Login and Register</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/">Home</a></li>
+    </ul>
+    <li><form class="nav navbar-nav navbar-right"><span class="form-group"><label for="email">Email address:</label>
+    <input type="email" class="form-control" id="email">
+    </span>
+    <span class="fform-inline"><label for="pwd">Password:</label><input type="password" class="form-control" id="pwd"></span>
+    <a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></form></li>
+    </ul>
+  </div>
+</nav>
+<h1>register Here</h1>
+<br>
+<br>
+    
+<div class="reastration">
+    <form action="/submit" method='post'>
+        <h4>register:</h4><br>
+    email:<input type="text" name="email"><br>
+    first name:<input type="text" name="firstName"><br>
+    last name<input type="text" name="lastName"><br>
+    screen name<input type="text" name="screenName"><br>
+    password <input type="password" name="password"><br>
+    confirm password<input type="password" name="confermPassword">
+    <br>
+    <button type="submmit" class='btn btn-primary'>submit</button>
+    </form>
+
+</div>

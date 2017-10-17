@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Login and register</title>
+  <meta charset="utf-8">
+  <meta name="login" content="flask_python_sql">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Login and Register</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/">Home</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+    {% block body %}
+    {% if session['logged_in'] == 'true' %}
+    {% for logged_in in session: %}
+    <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{session['screenName']}}</a></li>
+    {% endfor %}
+    {% else %}
+      <li><form class="form-inline"><span class="form-group"><label for="email">Email address:</label>
+    <input type="email" class="form-control" id="email">
+    </span>
+    <span class="form-group"><label for="pwd">Password:</label><input type="password" class="form-control" id="pwd"></span>
+    <a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></form></li>
+    </ul>
+    {% endif %}
+    {% endblock %}
+  </div>
+</nav>
+       <u>Info adress Entered:</u><br>
+    <ul>
+        {% for email in emaildb: %}
+        <li>email: {{email['email']}} date: {{email['datestamp']}}</li>
+     {% endfor %}
+    </ul>
+
+<div class="container">
+  <h2>User Info</h2>
+  <p>This is now the Info saved on your profile</p>            
+  <table class="table">
+    <thead>
+      <tr>
+        <th>email: </th>
+        <th>Lastname:</th>
+        <th>firstneame:</th>
+        <th>screen name:</th>
+        <th>password:</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{session['email']}}</td>
+      </tr>
+      <tr>
+        <td>{{session['firstName']}}</td>
+      </tr>
+      <tr>
+        <td>{{session['lastName']}}</td>
+      </tr>
+        <tr>
+        <td>{{session['screenName']}} </td>
+      </tr>
+      </tr>
+        <tr>
+        <td>{{session['password']}}</td>
+      </tr>
+      </tr>
+        <tr>
+        <td>{{session['loggedIn']}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>    
+    
+    
+</body>
+</html>
