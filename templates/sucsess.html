@@ -23,12 +23,13 @@
     {% if session['logged_in'] == 'true' %}
     {% for logged_in in session: %}
     <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{session['screenName']}}</a></li>
+    <li><a href="/logout"><span class="glyphicon glyphicon-user"></span> logout</a></li>
     {% endfor %}
     {% else %}
       <li><form class="form-inline"><span class="form-group"><label for="email">Email address:</label>
     <input type="email" class="form-control" id="email">
     </span>
-    <span class="form-group"><label for="pwd">Password:</label><input type="password" class="form-control" id="pwd"></span>
+    <span class="form-group"><label for="password">Password:</label><input type="password" class="form-control" id="password"></span>
     <a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></form></li>
     </ul>
     {% endif %}
@@ -44,7 +45,7 @@
 
 <div class="container">
   <h2>User Info</h2>
-  <p>This is now the Info saved on your profile</p>            
+  <p>This is now the Info saved on your profile</p>
   <table class="table">
     <thead>
       <tr>
@@ -78,8 +79,8 @@
       </tr>
     </tbody>
   </table>
-</div>    
-    
-    
+</div>
+
+
 </body>
 </html>

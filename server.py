@@ -40,13 +40,13 @@ def submit():
     match = re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', addressToVerify)
 
     emailquery = "select email from user"
-    
+
     if request.form['email'] != request.form['confermPassword']:
         flash('password dose not mach', 'passwordError')
-    
+
     if request.form['email'] == "email":
         flash('Email already in use', 'emailError')
-    
+
     if request.form['email'] == '':
         flash('Email cannot be blank', 'emailError')
     else:
@@ -56,84 +56,99 @@ def submit():
         flash('First Name cannot be blank', 'firstNameError')
     else:
         session['firstName'] = request.form['firstName']
-    
+
     if request.form['lastName'] == '':
         flash('Last Name cannot be blank', 'lastNameError')
     else:
         session['lastName'] = request.form['lastName']
-    
+
     if request.form['screenName'] == '':
         flash('screen Name cannot be blank', 'screenNameError')
     else:
         session['screenName'] = request.form['screenName']
-    
+
     if request.form['password'] == '':
         flash('password cannot be blank', 'passwordError')
     else:
         session['password'] = request.form['password']
-        
+
     if session['loggedIn'] == '':
         session['loggedIn'] = 'true'
-        
-    
+
+
     if match == None:
         return redirect('/register')
 
-    
+
         return redirect('/register')
 
     elif mysql.query_db(putinto, data):
         email = request.form['email']
         session['email'] = email
-        
+
         firstName = request.form['firstName']
         session['firstName'] = firstName
-        
+
         lastName = request.form['lastName']
         session['lastName'] = lastName
-        
+
         screenName = request.form['screenName']
         session['screenName'] = screenName
-        
+
         password = request.form['password']
         session['password'] = password
         return redirect ("/sucsess")
-    
+
 @app.route('/sucsess' )
 def sucsess():
 #    query
 #    userdb = mysql.query_db(query)
 
     return render_template("/sucsess.html")
-    
+
 @app.route('/login', methods=['Post'])
 def login():
-    print "poop"
-#    attemps = 0
+    attemps = 0
+    if attemps == 5:
+        return redirectct ('/lockout')
     email = request.form['email']
-    print email
-    query = "SELECT * FROM user WHERE email = '" + request.form['email'] +"'"
-    print query
-    userdb = mysql.query_db(query)
-    print userdb
+    data = {'email':request.form['email']}
+    result = "SELECT * FROM user WHERE email = :email"
+    userdb = mysql.query_db(result,data)
+    # print userdb[0]['password'], "line 116"
+    print request.form['pw'], "line 117"
+    # print request.form['pw'], "line 118"
+    if request.form['pw'] == "":
+        print "line 120"
+        return redirect('/')
+        flash ('no password!')
+    if request.form['email'] == "":
+        return redirect('/')
+        flash ('no email!')
+    if userdb[0]['email'] == request.form['email']:
+        pass
+        if userdb[0]['password'] == request.form['pw']:
+            print userdb[0]['password']
+            print "line 129"
+            session['email'] = userdb[0]['email']
+            session['firstName'] = userdb[0]['firstName']
+            session['lastName'] = userdb[0]['lastName']
+            session['screenName'] = userdb[0]['screenName']
+            return render_template("/sucsess.html")
+    if userdb[0]['email'] != request.form['email']:
+        print 'line 137'
+        flash('wrong password!')
+        attemps += 1
+        print attemps
+        return redirect('/')
+    if userdb[0]['password'] != request.form['pw']:
+        print 'line 137'
+        flash('wrong password!')
+        attemps += 1
+        print attemps
+        return redirect('/')
     print 'poop'
-    if userdb == request.form['email'] and userdb == request.form['password']:
-        print session['logged_in'], session['email'], session['firstName'], session['lastName'], session['screenName'], "poop"
-        session['logged_in'] = 'True'
-        session['email'] = 'email'
-        session['firstName'] = 'firstName'
-        session['lastName'] = 'lastName'
-        session['screenName'] = 'screenName'
-        print 'poop'  
-        return render_template("/sucsess.html")
-    print 'poop'   
-#    elif userdb != request.form['email'] or != request.form['password']:
-#        print 'poop'
-#        flash('wrong password!')
-#        attemps += 1
-#        return redirect('/')
-#    print 'poop'
-    
+
 @app.route('/logout')
 def logout():
     session['first_name'] = ''
@@ -145,6 +160,10 @@ def logout():
     session['loggedin'] = 'False'
 
     return redirect('/')
-    
+
+@app.route('/lockout')
+def lockout():
+    render_template("/lockout.html")
+    return render_template("/sucsess.html")
 
 app.run(debug=True)
